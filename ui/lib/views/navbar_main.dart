@@ -13,17 +13,17 @@ class NavBarMain extends StatefulWidget {
 class _NavBarMainState extends State<NavBarMain> {
   int currentPageIndex = 1;
 
-  static const List<NavigationDestination> destinations = [
+  List<NavigationDestination> get destinations => [
     NavigationDestination(
-      icon: Icon(Icons.leaderboard),
+      icon: Icon(Icons.leaderboard, color: currentPageIndex == 0 ? const Color.fromARGB(255, 0, 0, 0) : const Color.fromARGB(255, 255, 255, 255),),
       label: 'Leaderboards',
     ),
     NavigationDestination(
-      icon: Icon(Icons.home),
+      icon: Icon(Icons.home, color: currentPageIndex == 1 ? const Color.fromARGB(255, 0, 0, 0) : const Color.fromARGB(255, 255, 255, 255),),
       label: 'Home',
     ),
-    NavigationDestination(
-      icon: Icon(Icons.person),
+   NavigationDestination(
+      icon: Icon(Icons.person, color: currentPageIndex == 2 ? const Color.fromARGB(255, 0, 0, 0) : const Color.fromARGB(255, 255, 255, 255),),
       label: 'Profile',
     ),
   ];
@@ -31,18 +31,27 @@ class _NavBarMainState extends State<NavBarMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: NavigationBar(
-        destinations: destinations,
-        selectedIndex: currentPageIndex,
-        animationDuration: const Duration(milliseconds: 300),
-        indicatorShape: const CircleBorder(),
-        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-        indicatorColor: const Color(0xFF00FF00),
-        onDestinationSelected: (index) {
-          setState(() {
-            currentPageIndex = index;
-          });
-        },
+      extendBody: true,
+      extendBodyBehindAppBar: true,
+      bottomNavigationBar: NavigationBarTheme(
+        data: NavigationBarThemeData(
+          indicatorColor: const Color.fromARGB(255, 255, 255, 255),
+          labelTextStyle: WidgetStateProperty.all(
+              const TextStyle(color: Color.fromARGB(255, 255, 255, 255))),
+        ),
+        child: NavigationBar(
+          destinations: destinations,
+          backgroundColor: const Color(0X00FFFFFF),
+          selectedIndex: currentPageIndex,
+          animationDuration: const Duration(milliseconds: 300),
+          indicatorShape: const CircleBorder(),
+          labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+          onDestinationSelected: (index) {
+            setState(() {
+              currentPageIndex = index;
+            });
+          },
+        ),
       ),
       body: _getPage(currentPageIndex), // Add a method to switch pages
     );

@@ -32,6 +32,7 @@ class _PlanetVideoState extends State<PlanetVideo> {
         looping: true,
         autoInitialize: true,
         showControls: false,
+        fullScreenByDefault: false,
 
       );
     } catch (e) {
@@ -53,11 +54,18 @@ class _PlanetVideoState extends State<PlanetVideo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: DecoratedBox(
-        decoration: const BoxDecoration(),
-        child: _isLoading
-            ? const Center(child: CircularProgressIndicator())
-            : Chewie(controller: chewieController!),
+      extendBody: true,
+      extendBodyBehindAppBar: true,
+      body: Transform.scale(
+        scale: videoPlayerController.value.aspectRatio / MediaQuery.of(context).size.aspectRatio,
+        child: Center(
+          child: AspectRatio(
+            aspectRatio: videoPlayerController.value.aspectRatio,
+            child: _isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : Chewie(controller: chewieController!),
+          ),
+        ),
       ),
     );
   }
