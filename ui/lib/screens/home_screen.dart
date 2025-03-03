@@ -1,5 +1,6 @@
-  import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:geo_chaser/screens/sign_in_screen.dart';
+import 'package:geo_chaser/utils/auth.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -9,6 +10,17 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  final Auth auth = Auth();
+
+  Future <void> signOut() async {
+    await auth.signOut();
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const SignInScreen()),
+      );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,13 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Center(
         child: ElevatedButton(
+          onPressed: signOut,
           child:const Text("Sign Out"),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const SignInScreen()),
-            );
-          },
         ),
       ),
         );
