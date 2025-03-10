@@ -5,9 +5,12 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text("Profile", style: TextStyle(fontSize: 24)),
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/planets2.png"),
+          fit: BoxFit.contain,
+        ),
       ),
     );
   }
