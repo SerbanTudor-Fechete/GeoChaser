@@ -5,7 +5,7 @@ import 'package:video_player/video_player.dart';
 class PlanetVideo extends StatefulWidget {
   const PlanetVideo({super.key});
 
-  @override 
+  @override  
   State<PlanetVideo> createState() => _PlanetVideoState();
 }
 

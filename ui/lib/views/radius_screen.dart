@@ -14,23 +14,22 @@ class _RadiusScreenState extends State<RadiusScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Select Radius',
-              style: TextStyle(fontSize: 30),
-            ),
-            SliderTheme(
+      body: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          Positioned(
+            bottom: 100,
+            left: 20,
+            right: 20,
+            child: SliderTheme(
               data: const SliderThemeData(
-                activeTrackColor: Color.fromARGB(255, 255, 255, 255),
-                inactiveTrackColor: Color.fromARGB(255, 0, 0, 0),
+                activeTrackColor: Color.fromARGB(255, 0, 140, 255),
+                inactiveTrackColor: Color.fromARGB(255, 200, 200, 200),
                 trackShape: RectangularSliderTrackShape(),
                 trackHeight: 6.0,
-                thumbColor: Color.fromARGB(255, 0, 0, 0),
-               thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12.0),
-                overlayColor: Color.fromARGB(255, 255, 255, 255),
+                thumbColor: Color.fromARGB(255, 0, 140, 255),
+                thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                overlayColor: Color.fromARGB(50, 0, 140, 255),
                 overlayShape: RoundSliderOverlayShape(overlayRadius: 28.0),
               ),
               child: RangeSlider(
@@ -45,29 +44,33 @@ class _RadiusScreenState extends State<RadiusScreen> {
                 },
               ),
             ),
-                  const SizedBox(height: 20),
-                  Text(
-                    'Selected Range: ${selectedRange.start.round()} - ${selectedRange.end.round()}',
-                    style: const TextStyle(fontSize: 20),
+          ),
+          Positioned(
+            bottom: 30,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 0, 140, 255), // Background color
+                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const StreetViewScreen(),
                   ),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue, // Background color
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const StreetViewScreen(),
-                        ),
-                      );
-                    },
-                    child: const Text('Submit'),
-                  ),
-                ],
+                );
+              },
+              child: const Text(
+                'Start Game',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                ),
               ),
             ),
-          );
-        }
-      }
+          ),
+        ],
+      ),
+    );
+  }
+}

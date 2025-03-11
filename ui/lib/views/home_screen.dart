@@ -7,18 +7,17 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMixin {
+class _HomeScreenState extends State<HomeScreen>  {
   
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return Stack(
       alignment: Alignment.center,
       children: [
         Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/planet.png"),
+              image: AssetImage("assets/planets0.png"),
               fit: BoxFit.contain,
             ),
           ),
@@ -48,7 +47,4 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
       ],
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }
