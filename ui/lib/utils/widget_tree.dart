@@ -11,11 +11,19 @@ class WidgetTree extends StatefulWidget {
 }
 
 class _WidgetTreeState extends State<WidgetTree> {
+
+  final Auth _auth = Auth();
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-     stream: Auth().authStateChanges,
+     stream: _auth.authStateChanges,
      builder: (context, snaphot){
+
+    if (snaphot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
      if (snaphot.hasData) {
        return const HomeScreen();
      } else {

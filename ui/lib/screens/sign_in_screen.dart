@@ -4,6 +4,7 @@ import 'package:geo_chaser/screens/home_screen.dart';
 import 'package:geo_chaser/screens/sign_up_screen.dart';
 import 'package:geo_chaser/utils/colors_util.dart';
 import 'package:geo_chaser/utils/auth.dart';
+import 'package:http/http.dart' as https;
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -24,21 +25,51 @@ class _SignInScreenState extends State<SignInScreen> {
     password: _passwordTextController.text,
   );
 
+  if (!mounted) return;
+
   if (errorMessage == null) {
-    // Login successful, navigate to HomeScreen
-    if (context.mounted) {
+    final fireBaseUser = auth.currentUser;
+    if (fireBaseUser == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Firebase user not found.")),
+        );
+      return;
+    }
+    final fireBaseIdToken = await fireBaseUser.getIdToken();
+
+    if (!mounted) return;
+
+    final fireBaseUid = fireBaseUser.uid;
+
+    //send the Uid to the backend
+    final response = await https.get(
+      Uri.parse("http://192.168.1.130:8080/api/users/$fireBaseUid"),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization' : 'Bearer $fireBaseIdToken',
+      },
+    );
+
+    if (!mounted) return;
+
+    if(response.statusCode == 200){
+      // Login successful, navigate to HomeScreen
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const HomeScreen()),
       );
+    } else{
+      // Handle backend error response.
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Backend sign in failed.")),
+        );
     }
   } else {
     // Log and show the error message
-    if (context.mounted) {
+    if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(errorMessage)),
       );
-    }
   }
 }
 
@@ -64,18 +95,12 @@ class _SignInScreenState extends State<SignInScreen> {
                   const SizedBox(height: 30),
                   reusableTextField("Enter e-mail", Icons.person_outline, false,
                       _emailTextController),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20),
                   reusableTextField("Enter password", Icons.lock_outline, true,
                       _passwordTextController),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20),
                   signInSingUpButton(context, true, _handleSignIn),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20),
                   signUpOption(context),
                 ],
               ),

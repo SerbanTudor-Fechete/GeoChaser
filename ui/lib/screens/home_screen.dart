@@ -15,6 +15,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future <void> signOut() async {
     await auth.signOut();
+
+    if (!mounted) return;
+    
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const SignInScreen()),

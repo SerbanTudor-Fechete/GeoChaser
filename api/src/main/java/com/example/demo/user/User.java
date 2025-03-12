@@ -6,7 +6,11 @@ import jakarta.persistence.*;
 @Data
 @Entity
 @Table(name = "app_users",
-        uniqueConstraints = {@UniqueConstraint(columnNames = "username")})
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "fireBaseUid"),
+                @UniqueConstraint(columnNames = "username")
+
+        })
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -17,6 +21,9 @@ public class User {
 
     @Column(nullable = false)
     private String username;
+
+    @Column(nullable = false, unique = true)
+    private String fireBaseUid;
 
     @Column
     private Long score;
