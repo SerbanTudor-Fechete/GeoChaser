@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen>  {
               'Start Game',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 18,
+                fontSize: 20,
               ),
             ),
           ),
