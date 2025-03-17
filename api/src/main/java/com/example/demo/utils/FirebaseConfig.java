@@ -27,7 +27,7 @@ public class FirebaseConfig {
             FirebaseApp.initializeApp(options);
             log.info("FirebaseApp initialized");
         }catch (IOException e){
-            log.error("Error initializing Firebase Admin SDK: "+e.getMessage());
+            log.error("Error initializing Firebase Admin SDK: {}", e.getMessage());
         }
     }
 }

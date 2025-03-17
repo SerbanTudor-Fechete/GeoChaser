@@ -1,2 +1,0 @@
-D:/Info/GeoChaser/ui/android/app/.cxx/Debug/42p6i587/armeabi-v7a/CMakeFiles/edit_cache.dir
-D:/Info/GeoChaser/ui/android/app/.cxx/Debug/42p6i587/armeabi-v7a/CMakeFiles/rebuild_cache.dir
