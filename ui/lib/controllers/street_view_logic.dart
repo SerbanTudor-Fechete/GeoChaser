@@ -19,7 +19,7 @@ class _StreetViewLogicState extends State<StreetViewLogic> {
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       // Load the server endpoint with hardcoded coordinates and radius.
       ..loadRequest(Uri.parse(
-          "http://192.168.1.130:8080/api/streetview"));
+          "http://192.168.1.128:8080/api/streetview"));
   }
 
   @override

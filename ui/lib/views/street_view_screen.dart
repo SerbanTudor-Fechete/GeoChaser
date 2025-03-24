@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geo_chaser/controllers/mini_map_logic.dart';
+import 'package:geo_chaser/controllers/street_view_logic.dart';
 
 class StreetViewScreen extends StatefulWidget {
   const StreetViewScreen({super.key});
@@ -15,6 +16,7 @@ class _StreetViewScreenState extends State<StreetViewScreen> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
+          StreetViewLogic(),
           Align(
             alignment: Alignment.bottomLeft,
               child: Container(
@@ -24,12 +26,6 @@ class _StreetViewScreenState extends State<StreetViewScreen> {
                 child: MiniMapLogic(),
               ),
             ),
-          Center(
-            child: Text(
-              'Street View',
-              style: TextStyle(fontSize: 30),
-            ),
-          ),
         ],
       ),
     );
