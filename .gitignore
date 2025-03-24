@@ -1,3 +1,4 @@
 /api_key.txt
 /git-filter-repo
 /database.yaml
+/api/src/main/resources/application.properties
