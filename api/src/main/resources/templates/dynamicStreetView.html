@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+     <title>Google Maps Street View</title>
+     <style>
+          html, body, #street-view {
+               height: 100%;
+               margin: 0;
+               padding: 0;
+          }
+          #no-data {
+               display: none;
+               text-align: center;
+               font-size: 20px;
+               color: red;
+          }
+     </style>
+</head>
+<body>
+<div id="street-view"></div>
+<div id="no-data">No Street View data available at this location.</div>
+
+<script type="text/javascript" th:inline="javascript">
+     /*<![CDATA[*/
+     var apiKey = [[${apiKey}]];
+     var latitude = /*[[${latitude}]]*/ 0;
+     var longitude = /*[[${longitude}]]*/ 0;
+
+     // Create and append the Google Maps script tag with async and defer attributes
+     var script = document.createElement('script');
+     script.src = 'https://maps.googleapis.com/maps/api/js?key=' + apiKey + '&v=weekly';
+     script.async = true;
+     script.defer = true;
+     document.head.appendChild(script);
+
+     // Once the API is loaded, initialize the Street View panorama
+     script.onload = function () {
+          initStreetView();
+     };
+
+     // Function to request the nearest panorama and initialize the view
+     function initStreetView() {
+          var position = { lat: latitude, lng: longitude };
+          var streetViewService = new google.maps.StreetViewService();
+          var panoramaElement = document.getElementById('street-view');
+
+          streetViewService.getPanorama({
+               location: position,
+               radius: 500  // adjust as needed
+          }, function (data, status) {
+               if (status === google.maps.StreetViewStatus.OK) {
+                    // Use the nearest panorama's location
+                    var nearestPanoramaLocation = data.location.latLng;
+                    var panorama = new google.maps.StreetViewPanorama(
+                            panoramaElement, {
+                                 position: nearestPanoramaLocation,
+                                 pov: { heading: 165, pitch: 0 },
+                                 zoom: 1,
+                                 motionTracking: false,
+                                 motionTrackingControl: false,
+                                 disableDefaultUI: true,
+                                 linksControl: false,
+                                 clickToGo: false,
+                                 showRoadLabels: false
+                            }
+                    );
+                    console.log("Using nearest panorama at:", nearestPanoramaLocation);
+               } else {
+                    console.log("No Street View data found within radius");
+                    panoramaElement.style.display = 'none';
+                    document.getElementById('no-data').style.display = 'block';
+               }
+          });
+     }
+     /*]]>*/
+</script>
+</body>
+</html>

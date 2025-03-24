@@ -42,7 +42,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
     //send the Uid to the backend
     final response = await https.get(
-      Uri.parse("http://192.168.1.128:8080/api/users/$fireBaseUid"),
+      Uri.parse("http://192.168.1.130:8080/api/users/$fireBaseUid"),
       headers: {
         'Content-Type': 'application/json',
         'Authorization' : 'Bearer $fireBaseIdToken',
