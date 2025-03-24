@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geo_chaser/controllers/current_location_logic.dart';
 import 'package:geo_chaser/views/street_view_screen.dart';
 
 class RadiusScreen extends StatefulWidget {
@@ -53,6 +54,7 @@ class _RadiusScreenState extends State<RadiusScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
               ),
               onPressed: () {
+                currentLocationLogic();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
