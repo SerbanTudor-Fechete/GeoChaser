@@ -1,0 +1,2 @@
+C:/Users/serba/Downloads/geo_chaser/ui/android/app/.cxx/RelWithDebInfo/2t5x5xa3/x86/CMakeFiles/edit_cache.dir
+C:/Users/serba/Downloads/geo_chaser/ui/android/app/.cxx/RelWithDebInfo/2t5x5xa3/x86/CMakeFiles/rebuild_cache.dir
