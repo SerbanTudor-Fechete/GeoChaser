@@ -20,7 +20,7 @@ public class ApiKeyLoader {
         try{
             // Path path = Path.of(apiKeyLocation);
 
-            Path path = Path.of("D:/Info/GeoChaser/api_key.txt");
+            Path path = Path.of("C:/Users/serba/Downloads/geo_chaser/api_key.txt");
             return Files.readString(path).trim();
         }catch(IOException e){
             throw new RuntimeException("Failed to load API key from file "+e);
