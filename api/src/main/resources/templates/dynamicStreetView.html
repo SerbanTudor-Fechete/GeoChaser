@@ -65,6 +65,29 @@
                             }
                     );
                     console.log("Using nearest panorama at:", nearestPanoramaLocation);
+
+                    //send the coordinates to the backend
+                    fetch('/game/coordinate', {
+                         method:'POST',
+                         headers: {
+                              'Content-Type': 'application/json',
+                              'Accept': 'application/json'  // <-- Add this line
+
+                         },
+                         body: JSON.stringify({
+                              lat: nearestPanoramaLocation.lat(),
+                              lng:nearestPanoramaLocation.lng()
+                         })
+                    })
+                            .then(response => {
+                                 if (response.ok){
+                                      console.log("Coordinates succesfully updated.");
+                                 } else {
+                                      console.error('Failed to update coordinates on server.');
+                                 }
+                            })
+                            .catch(error => console.error('Error updating coordinates:', error));
+
                } else {
                     console.log("No Street View data found within radius");
                     panoramaElement.style.display = 'none';

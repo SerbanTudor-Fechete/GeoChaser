@@ -16,7 +16,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         // Allow registration endpoint without authentication
-                        .requestMatchers("/api/users/register", "/api/streetview").permitAll()
+                        .requestMatchers("/api/users/register", "/api/streetview", "/game/**").permitAll()
                         // Optionally, allow other endpoints as needed
                         .anyRequest().authenticated()
                 )

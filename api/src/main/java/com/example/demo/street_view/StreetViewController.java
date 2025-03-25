@@ -22,12 +22,11 @@ public class StreetViewController {
 
     @GetMapping("/streetview")
     public String serveStreetView(
-
+            @RequestParam double latitude,
+            @RequestParam double longitude,
+            //@RequestParam String radius,
             Model model) {
-        // Hardcoded values
-        double latitude = 40.714728;
-        double longitude = -73.998672;
-        String radius = "100";
+        String radius = "500";
         log.info("Received coordonates: {}", new double[]{latitude, longitude});
 
         String apiKey = apiKeyLoader.getApiKey();
