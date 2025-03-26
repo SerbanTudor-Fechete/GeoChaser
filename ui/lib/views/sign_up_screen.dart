@@ -53,7 +53,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     // Send the UID and username to your backend for registration.
     final response = await https.post(
-      Uri.parse("http://192.168.1.130:8080/api/users/register"),
+      Uri.parse("http://192.168.1.128:8080/api/users/register"),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $fireBaseIdToken',

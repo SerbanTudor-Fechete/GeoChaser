@@ -28,7 +28,7 @@ class _StreetViewLogicState extends State<StreetViewLogic> {
       setState(() {
       });
       // Once we have the location, build the URL with query parameters.
-      final url = "http://192.168.1.130:8080/api/streetview?latitude=${location.latitude}&longitude=${location.longitude}";
+      final url = "http://192.168.1.128:8080/api/streetview?latitude=${location.latitude}&longitude=${location.longitude}";
       _controller.loadRequest(Uri.parse(url));
     } catch (e) {
       debugPrint("Error getting location: $e");

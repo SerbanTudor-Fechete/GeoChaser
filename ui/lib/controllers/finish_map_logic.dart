@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geo_chaser/controllers/coordinates.dart';
 import 'package:geo_chaser/controllers/current_location_logic.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -10,16 +11,34 @@ class FinishMapLogic extends StatefulWidget {
 }
 
 class _FinishMapLogicState extends State<FinishMapLogic> {
+
   GoogleMapController? _mapController;
   LatLng? _currentLatLng;
-  final LatLng _finishLatLng = const LatLng(46.78438630790457, 23.557201454588892);
+  LatLng? _finishLatLng;
   Polyline? _polyline;
 
   @override
   void initState() {
     super.initState();
     _loadCurrentLocation();
+    _loadFinishCoordinates();
 }
+
+
+Future<void> _loadFinishCoordinates() async {
+    try {
+      final coords = await fetchCoordinates(); 
+      if (coords != null) {
+        setState(() {
+          _finishLatLng = LatLng(coords.lat, coords.lng);
+        });
+        _initPolyline(); 
+        _updateCameraPosition(); 
+      }
+    } catch (e) {
+      debugPrint("Error getting finish coordinates: $e");
+    }
+  }
 
   Future<void> _loadCurrentLocation() async {
     try {
@@ -40,8 +59,8 @@ class _FinishMapLogicState extends State<FinishMapLogic> {
       color: Colors.red,
       width: 5,
       points: [
-        _currentLatLng ?? LatLng(0, 0),
-        _finishLatLng,
+        _currentLatLng!,
+        _finishLatLng!,
       ],
     );
   }
@@ -55,20 +74,20 @@ class _FinishMapLogicState extends State<FinishMapLogic> {
     if (_currentLatLng != null && _mapController != null) {
       LatLngBounds bounds = LatLngBounds(
         southwest: LatLng(
-          _currentLatLng!.latitude < _finishLatLng.latitude
+          _currentLatLng!.latitude < _finishLatLng!.latitude
               ? _currentLatLng!.latitude
-              : _finishLatLng.latitude,
-          _currentLatLng!.longitude < _finishLatLng.longitude
+              : _finishLatLng!.latitude,
+          _currentLatLng!.longitude < _finishLatLng!.longitude
               ? _currentLatLng!.longitude
-              : _finishLatLng.longitude,
+              : _finishLatLng!.longitude,
         ),
         northeast: LatLng(
-          _currentLatLng!.latitude > _finishLatLng.latitude
+          _currentLatLng!.latitude > _finishLatLng!.latitude
               ? _currentLatLng!.latitude
-              : _finishLatLng.latitude,
-          _currentLatLng!.longitude > _finishLatLng.longitude
+              : _finishLatLng!.latitude,
+          _currentLatLng!.longitude > _finishLatLng!.longitude
               ? _currentLatLng!.longitude
-              : _finishLatLng.longitude,
+              : _finishLatLng!.longitude,
         ),
       );
       _mapController!.animateCamera(CameraUpdate.newLatLngBounds(bounds, 50));
@@ -95,7 +114,7 @@ class _FinishMapLogicState extends State<FinishMapLogic> {
                 Marker(
                   icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
                   markerId: MarkerId('finishLocation'),
-                  position: _finishLatLng,
+                  position: _finishLatLng!,
                 ),
                 },
                 polylines: _polyline != null ? <Polyline>{_polyline!} : <Polyline>{},
