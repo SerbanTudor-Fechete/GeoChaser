@@ -6,6 +6,7 @@
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
 - [Installation & Setup](installation-&-setup)
+- [Contributors](contributors)
 
 ## Features
 
@@ -125,9 +126,9 @@ git clone https://github.com/SerbanTudor-Fechete/GeoChaser.git
 flutter doctor
 ```
 
-### 3 Install Java 21+ & Spring Boot (with Maven)
-You need Java 21+ and Maven to run the backend.  
-- Install OpenJDK 21+ or any other JDK provider ([OpenJDK Downloads](https://openjdk.java.net/))  
+### 3 Install Java 17 & Spring Boot (with Maven)
+You need Java 17 and Maven to run the backend.  
+- Install OpenJDK 17 or any other JDK provider ([OpenJDK Downloads](https://openjdk.java.net/))  
 - Install Maven ([Maven Installation Guide](https://maven.apache.org/install.html))  
 - Alternatively, use an IDE like IntelliJ or VSCode with Java and Maven support.
 
@@ -183,7 +184,10 @@ cd ui
 flutter pub get
 flutter run
 ```
-
-
-
-
+## Contributors
+<a href="https://github.com/AndreiT01">
+  <img src="https://github.com/AndreiT01.png?size=100" width="100" style="border-radius:50%" />
+</a>
+<a href="https://github.com/SerbanTudor-Fechete">
+  <img src="https://github.com/SerbanTudor-Fechete.png?size=100" width="100" style="border-radius:50%" />
+</a>
