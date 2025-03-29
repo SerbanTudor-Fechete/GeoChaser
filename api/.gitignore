@@ -18,6 +18,8 @@ target/
 *.iws
 *.iml
 *.ipr
+api/src/main/resources/geochaser-5eede-firebase-adminsdk-fbsvc-69221dc2d2.json
+
 
 ### NetBeans ###
 /nbproject/private/
@@ -31,3 +33,4 @@ build/
 
 ### VS Code ###
 .vscode/
+/src/main/resources/geochaser-5eede-firebase-adminsdk-fbsvc-69221dc2d2.json
