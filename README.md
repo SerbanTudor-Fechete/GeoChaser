@@ -185,9 +185,7 @@ flutter pub get
 flutter run
 ```
 ## Contributors
-<a href="https://github.com/AndreiT01">
-  <img src="https://github.com/AndreiT01.png?size=100" width="100" style="border-radius:50%" />
-</a>
-<a href="https://github.com/SerbanTudor-Fechete">
-  <img src="https://github.com/SerbanTudor-Fechete.png?size=100" width="100" style="border-radius:50%" />
-</a>
+<div style="display: flex; gap: 10px;">
+<a href="https://github.com/AndreiT01"><img src="https://github.com/AndreiT01.png?size=100" width="100" style="border-radius:50%" /></a>
+<a href="https://github.com/SerbanTudor-Fechete"><img src="https://github.com/SerbanTudor-Fechete.png?size=100" width="100" style="border-radius:50%" /></a>
+</div>
